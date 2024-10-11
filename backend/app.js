@@ -21,6 +21,9 @@ app.use(morgan("dev"));
 // Routes
 app.use("/api/auth", require("./routes/auth/authRoutes"));
 app.use("/api/user", require("./routes/auth/userRoutes"));
+app.use("/api/menus", require("./routes/menuRoutes"));
+app.use("/api/restaurants", require("./routes/restaurantRoutes"));
+app.use("/api/orders", require("./routes/orderRoutes"));
 
 app.get("/", (req, res) => {
   return res.send("API is running...");

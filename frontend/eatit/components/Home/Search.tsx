@@ -4,7 +4,7 @@ import React from "react";
 
 const { primaryColor, secondaryColor } = require("@/constants/Colors");
 
-const { iconSize } = require("@/constants/Default");
+const { iconSize, wrapperMargin } = require("@/constants/Default");
 
 const Search = () => {
   return (
@@ -29,8 +29,10 @@ const Search = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: 40,
-    top: 20,
+    marginTop: 10,
+    marginBottom: 10,
+    paddingLeft: wrapperMargin,
+    paddingRight: wrapperMargin,
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
@@ -48,12 +50,9 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 30,
     borderBottomRightRadius: 30,
     borderTopRightRadius: 30,
-
     flex: 1,
   },
   filterGroup: {
-    marginRight: 80,
-
     borderRadius: 100,
   },
   inputField: {

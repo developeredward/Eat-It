@@ -46,7 +46,9 @@ const styles = StyleSheet.create({
     backgroundColor: secondaryColor,
     height: 150,
     borderRadius: 20,
-    margin: wrapperMargin,
+    marginLeft: wrapperMargin,
+    marginRight: wrapperMargin,
+    marginTop: 10,
   },
   textContent: {
     padding: wrapperPadding,

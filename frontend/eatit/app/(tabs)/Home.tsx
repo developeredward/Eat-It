@@ -1,14 +1,28 @@
 import Featured from "@/components/Card/Featured";
+import ProductCardList from "@/components/Card/ProductCardList";
 import Search from "@/components/Home/Search";
-import { StyleSheet, View, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 
 const { primaryColor, secondaryColor } = require("@/constants/Colors");
+const { wrapperMargin, headerFontSize } = require("@/constants/Default");
 
 export default function Home() {
   return (
     <View style={styles.container}>
       <Search />
-      <Featured />
+      <ScrollView
+        contentContainerStyle={styles.scrollViewContainer}
+        showsVerticalScrollIndicator={false}
+      >
+        <Featured />
+        <ProductCardList />
+      </ScrollView>
     </View>
   );
 }
@@ -16,6 +30,18 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: primaryColor,
-    height: 400,
+  },
+  scrollViewContainer: {
+    backgroundColor: primaryColor,
+    height: "100%",
+  },
+  cardContainer: {
+    backgroundColor: primaryColor,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 30,
+    marginTop: 30,
+    height: 300,
+    paddingLeft: wrapperMargin,
   },
 });

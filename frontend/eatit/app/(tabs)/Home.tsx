@@ -1,3 +1,4 @@
+import Featured from "@/components/Card/Featured";
 import Search from "@/components/Home/Search";
 import { StyleSheet, View, Text } from "react-native";
 
@@ -7,6 +8,7 @@ export default function Home() {
   return (
     <View style={styles.container}>
       <Search />
+      <Featured />
     </View>
   );
 }

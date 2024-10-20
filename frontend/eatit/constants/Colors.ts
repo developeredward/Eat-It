@@ -3,7 +3,7 @@ const tintColorDark = "#fff";
 
 export const primaryColor = "#F6F7F7";
 export const secondaryColor = "#40434A";
-export const altColor = "#40434A";
+export const altColor = "#E3705F";
 
 export default {
   light: {

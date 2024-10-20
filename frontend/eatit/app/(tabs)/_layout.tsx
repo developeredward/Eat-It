@@ -10,6 +10,9 @@ import { Link, Tabs } from "expo-router";
 import Header from "@/components/Header/Header";
 import HeaderLeft from "@/components/Header/HeaderLeft";
 
+const { primaryColor, secondaryColor } = require("@/constants/Colors");
+const { iconSize, wrapperMargin } = require("@/constants/Default");
+
 export default function TabLayout() {
   return (
     <Tabs screenOptions={{ tabBarShowLabel: false }}>
@@ -24,9 +27,9 @@ export default function TabLayout() {
           headerRight: () => (
             <Ionicons
               name="notifications-outline"
-              style={{ marginRight: 40 }}
-              size={30}
-              color="gray"
+              style={{ marginRight: wrapperMargin }}
+              size={iconSize}
+              color={secondaryColor}
             />
           ),
           headerLeft: () => <HeaderLeft />,
@@ -36,7 +39,7 @@ export default function TabLayout() {
         name="Discover"
         options={{
           tabBarIcon: ({ color }) => (
-            <SimpleLineIcons name="compass" size={30} color={color} />
+            <SimpleLineIcons name="compass" size={iconSize} color={color} />
           ),
         }}
       />
@@ -44,7 +47,7 @@ export default function TabLayout() {
         name="Cart"
         options={{
           tabBarIcon: ({ color }) => (
-            <Feather name="shopping-cart" size={30} color={color} />
+            <Feather name="shopping-cart" size={iconSize} color={color} />
           ),
         }}
       />

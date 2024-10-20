@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
   },
   inputField: {
     height: 50,
+    width: "100%",
   },
 });
 

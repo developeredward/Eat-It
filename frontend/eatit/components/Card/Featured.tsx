@@ -7,7 +7,6 @@ const {
   altColor,
 } = require("@/constants/Colors");
 const {
-  iconSize,
   wrapperMargin,
   wrapperPadding,
   headerFontSize,
@@ -18,13 +17,13 @@ const Featured = () => {
   return (
     <View style={styles.container}>
       <View style={styles.textContent}>
-        <Text style={styles.textColor}>Special Deals</Text>
+        <Text style={styles.textColor}>Special Deals 🔥</Text>
         <Text style={[styles.textColor, styles.strong]}>50% OFF</Text>
         <Text style={[styles.textColor, styles.paragraph]}>
           and get free delivery
         </Text>
         <TouchableOpacity style={styles.btn}>
-          <Text style={styles.textColor}>Shop Now</Text>
+          <Text style={styles.textColor}>Order Now</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.imgPlaceholder}>

@@ -13,25 +13,8 @@ import ProductCard from "./ProductCard";
 const ProductCardList = () => {
   return (
     <View>
-      <View
-        style={{
-          flexDirection: "row",
-          width: "100%",
-          paddingLeft: wrapperMargin,
-          paddingRight: wrapperMargin,
-          justifyContent: "space-between",
-          alignItems: "baseline",
-          marginTop: 30,
-        }}
-      >
-        <Text
-          style={{
-            fontSize: headerFontSize,
-            fontWeight: "bold",
-          }}
-        >
-          Popular Food
-        </Text>
+      <View style={styles.headContainer}>
+        <Text style={styles.title}>Popular Food</Text>
         <TouchableOpacity>
           <Text style={{ color: secondaryColor }}>See All</Text>
         </TouchableOpacity>
@@ -50,6 +33,19 @@ const ProductCardList = () => {
   );
 };
 const styles = StyleSheet.create({
+  headContainer: {
+    flexDirection: "row",
+    width: "100%",
+    paddingLeft: wrapperMargin,
+    paddingRight: wrapperMargin,
+    justifyContent: "space-between",
+    alignItems: "baseline",
+    marginTop: 30,
+  },
+  title: {
+    fontSize: headerFontSize,
+    fontWeight: "bold",
+  },
   scrollViewContainer: {
     backgroundColor: primaryColor,
     height: "100%",

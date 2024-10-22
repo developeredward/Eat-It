@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     gap: 10,
+    paddingLeft: 10,
   },
   rating: {
     color: secondaryColor,
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   price: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: "600",
   },
   btn: {

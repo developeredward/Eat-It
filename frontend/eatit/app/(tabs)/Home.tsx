@@ -56,7 +56,7 @@ export default function Home() {
         <Featured />
         <ProductCardList />
         <RestaurantList data={data} />
-        <FeaturedStoreList />
+        <FeaturedStoreList data={data} />
       </ScrollView>
     </View>
   );
@@ -68,6 +68,5 @@ const styles = StyleSheet.create({
   },
   scrollViewContainer: {
     backgroundColor: primaryColor,
-    // height: "100%",
   },
 });

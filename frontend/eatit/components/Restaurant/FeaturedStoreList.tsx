@@ -1,16 +1,26 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import React from "react";
 import FeaturedStoreCard from "./FeaturedStoreCard";
 
 import { wrapperMargin, headerFontSize } from "@/constants/Default";
 
-const FeaturedStoreList = () => {
+interface FeaturedStoreListProps {
+  data: { id: Number; [key: string]: any }[];
+}
+
+const FeaturedStoreList: React.FC<FeaturedStoreListProps> = ({ data }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Featured Stores</Text>
-      <View style={styles.storeList}>
-        <FeaturedStoreCard />
-      </View>
+      <ScrollView
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.storeList}
+      >
+        {data.map((item: any) => (
+          <FeaturedStoreCard item={item} />
+        ))}
+      </ScrollView>
     </View>
   );
 };
@@ -20,7 +30,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     paddingLeft: wrapperMargin,
     paddingRight: wrapperMargin,
-    height: 200,
+    height: 400,
   },
   title: {
     fontSize: headerFontSize,

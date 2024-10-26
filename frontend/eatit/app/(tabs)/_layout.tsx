@@ -12,12 +12,22 @@ import { Tabs } from "expo-router";
 import Header from "@/components/Header/Header";
 import HeaderLeft from "@/components/Header/HeaderLeft";
 
-const { secondaryColor } = require("@/constants/Colors");
+const {
+  primaryColor,
+  altColor,
+  secondaryColor,
+} = require("@/constants/Colors");
 const { iconSize, wrapperMargin } = require("@/constants/Default");
 
 export default function TabLayout() {
   return (
-    <Tabs screenOptions={{ tabBarShowLabel: false }}>
+    <Tabs
+      screenOptions={{
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: altColor,
+        tabBarInactiveTintColor: secondaryColor,
+      }}
+    >
       <Tabs.Screen
         name="Home"
         options={{
@@ -26,6 +36,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => (
             <Entypo name="home" size={30} color={color} fill={color} />
           ),
+
           headerRight: () => (
             <Ionicons
               name="notifications-outline"

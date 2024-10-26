@@ -18,7 +18,7 @@ const FeaturedStoreList: React.FC<FeaturedStoreListProps> = ({ data }) => {
         contentContainerStyle={styles.storeList}
       >
         {data.map((item: any) => (
-          <FeaturedStoreCard item={item} />
+          <FeaturedStoreCard key={item.id} item={item} />
         ))}
       </ScrollView>
     </View>
@@ -28,17 +28,20 @@ const FeaturedStoreList: React.FC<FeaturedStoreListProps> = ({ data }) => {
 const styles = StyleSheet.create({
   container: {
     marginTop: 30,
-    paddingLeft: wrapperMargin,
-    paddingRight: wrapperMargin,
     height: 400,
   },
   title: {
+    paddingLeft: wrapperMargin,
+    paddingRight: wrapperMargin,
     fontSize: headerFontSize,
     fontWeight: "bold",
   },
   storeList: {
     flexDirection: "row",
     justifyContent: "space-between",
+    gap: 10,
+    marginTop: 20,
+    paddingLeft: wrapperMargin,
   },
 });
 

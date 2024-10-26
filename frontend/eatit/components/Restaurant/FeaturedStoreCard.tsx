@@ -2,11 +2,14 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Image,
-  ScrollView,
   StyleSheet,
+  ImageBackground,
 } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { EvilIcons } from "@expo/vector-icons";
 import React from "react";
+
+import { primaryColor, secondaryColor } from "@/constants/Colors";
 
 interface FeaturedStoreCardProps {
   item: { [key: string]: any };
@@ -15,22 +18,32 @@ interface FeaturedStoreCardProps {
 const FeaturedStoreCard: React.FC<FeaturedStoreCardProps> = ({ item }) => {
   return (
     <TouchableOpacity style={styles.card}>
-      <View style={styles.imagePlacholder}>
-        <Image
-          style={styles.image}
-          width={100}
-          height={200}
-          source={{
-            uri: "https://www.transparentpng.com/thumb/food/yUN9iB-food-burger-clipart-transparent.png",
-          }}
-        />
-      </View>
-      <View style={styles.info}>
-        <View style={styles.infoText}>
-          <Text style={styles.heading}>Burger Meal</Text>
-          <Text style={styles.price}>$10</Text>
+      <ImageBackground
+        source={{
+          uri: "https://www.fastfoodclub.com/wp-content/uploads/2024/09/Get-Ready-for-New-Flavors-McDonalds-Menu-Updates-You-Cant-Miss.png",
+        }}
+        resizeMode="cover"
+        imageStyle={styles.info}
+        style={styles.info}
+      >
+        <View style={styles.category}>
+          <Text style={{ color: "#ffffff" }}>Fast food</Text>
         </View>
-      </View>
+        <LinearGradient
+          colors={["rgba(0,0,0,0)", "rgba(0,0,0,0.54)", "rgba(0,0,0,1)"]}
+          style={styles.infoText}
+        >
+          <View>
+            <Text style={styles.heading}>McDonald's</Text>
+            <Text style={styles.dist}>24 Min | Pick up | Delivery</Text>
+          </View>
+          <View>
+            <TouchableOpacity style={styles.btn}>
+              <EvilIcons name="heart" size={24} color="#ffffff" />
+            </TouchableOpacity>
+          </View>
+        </LinearGradient>
+      </ImageBackground>
     </TouchableOpacity>
   );
 };
@@ -40,7 +53,6 @@ const styles = StyleSheet.create({
     width: 300,
     height: 200,
     borderRadius: 20,
-    padding: 10,
     shadowColor: "#000000",
     shadowOffset: {
       width: 1,
@@ -49,37 +61,53 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.02,
   },
   info: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    height: "100%",
+    width: "100%",
+    borderRadius: 20,
+  },
+  category: {
+    position: "absolute",
+    top: 2,
+    margin: 10,
+    height: 30,
+    minWidth: 100,
+    justifyContent: "center",
     alignItems: "center",
-    gap: 10,
-    paddingLeft: 10,
+    borderRadius: 20,
+    backgroundColor: "rgba(0,0,0,0.5)",
   },
 
   infoText: {
+    flexDirection: "row",
+    color: "#ffffff",
+    height: 120,
+    width: "100%",
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    position: "absolute",
+    bottom: 0,
     gap: 10,
-    justifyContent: "center",
-    alignItems: "flex-start",
+    padding: 20,
+    justifyContent: "space-between",
+    alignItems: "flex-end",
   },
   heading: {
-    fontSize: 18,
-    fontWeight: "500",
-  },
-  price: {
-    fontSize: 16,
-    fontWeight: "600",
-  },
-  btn: {
-    justifyContent: "center",
-    alignItems: "center",
-    top: 20,
+    fontSize: 22,
+    color: "#ffffff",
+    fontWeight: "bold",
   },
 
-  imagePlacholder: {
-    // backgroundColor: "red",
+  btn: {
+    backgroundColor: secondaryColor,
+
+    padding: 10,
+    borderRadius: 10,
   },
-  image: {
-    objectFit: "contain",
+
+  dist: {
+    fontSize: 12,
+    color: "#ffffff",
+    top: 5,
   },
 });
 

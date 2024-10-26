@@ -4,13 +4,15 @@ import {
   Ionicons,
   SimpleLineIcons,
   Feather,
+  MaterialIcons,
+  Entypo,
 } from "@expo/vector-icons";
 import { SafeAreaView, View, Text, Image, StyleSheet } from "react-native";
-import { Link, Tabs } from "expo-router";
+import { Tabs } from "expo-router";
 import Header from "@/components/Header/Header";
 import HeaderLeft from "@/components/Header/HeaderLeft";
 
-const { primaryColor, secondaryColor } = require("@/constants/Colors");
+const { secondaryColor } = require("@/constants/Colors");
 const { iconSize, wrapperMargin } = require("@/constants/Default");
 
 export default function TabLayout() {
@@ -22,7 +24,7 @@ export default function TabLayout() {
           title: "",
           headerBackground: () => <Header />,
           tabBarIcon: ({ color }) => (
-            <Octicons name="home" size={30} color={color} fill={color} />
+            <Entypo name="home" size={30} color={color} fill={color} />
           ),
           headerRight: () => (
             <Ionicons
@@ -39,7 +41,7 @@ export default function TabLayout() {
         name="Discover"
         options={{
           tabBarIcon: ({ color }) => (
-            <SimpleLineIcons name="compass" size={iconSize} color={color} />
+            <MaterialIcons name="explore" size={iconSize} color={color} />
           ),
         }}
       />
@@ -47,7 +49,7 @@ export default function TabLayout() {
         name="Cart"
         options={{
           tabBarIcon: ({ color }) => (
-            <Feather name="shopping-cart" size={iconSize} color={color} />
+            <Ionicons name="cart" size={iconSize} color={color} />
           ),
         }}
       />

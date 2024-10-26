@@ -27,7 +27,7 @@ const FeaturedStoreCard: React.FC<FeaturedStoreCardProps> = ({ item }) => {
         style={styles.info}
       >
         <View style={styles.category}>
-          <Text style={{ color: "#ffffff" }}>Fast food</Text>
+          <Text style={{ color: "#ffffff" }}>🍔 Fast food</Text>
         </View>
         <LinearGradient
           colors={["rgba(0,0,0,0)", "rgba(0,0,0,0.54)", "rgba(0,0,0,1)"]}

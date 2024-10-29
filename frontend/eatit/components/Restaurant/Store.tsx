@@ -15,10 +15,10 @@ const Store: React.FC<StoreProps> = ({ item }) => {
         height={100}
         width={100}
         source={{
-          uri: item.image,
+          uri: item.imageurl,
         }}
       />
-      <Text style={styles.title}>{item.title}</Text>
+      <Text style={styles.title}>{item.name}</Text>
     </TouchableOpacity>
   );
 };

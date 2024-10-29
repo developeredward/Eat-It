@@ -15,7 +15,7 @@ const RestaurantList: React.FC<RestaurantListProps> = ({ data }) => {
       <Text style={styles.headTitle}>Recommended For You</Text>
       <View style={styles.cards}>
         {data.map((item: any) => (
-          <Store key={item.id} item={item} />
+          <Store key={item._id} item={item} />
         ))}
       </View>
     </View>

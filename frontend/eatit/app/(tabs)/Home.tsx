@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Featured from "@/components/Card/Featured";
 import ProductCardList from "@/components/Card/ProductCardList";
 import Search from "@/components/Home/Search";
@@ -13,39 +14,28 @@ import {
 
 const { primaryColor, secondaryColor } = require("@/constants/Colors");
 const { wrapperMargin, headerFontSize } = require("@/constants/Default");
-
-const data = [
-  {
-    id: 1,
-    title: "Burger King",
-    price: 10,
-    image:
-      "https://www.pngplay.com/wp-content/uploads/9/McDonalds-Background-PNG-Image.png",
-  },
-  {
-    id: 2,
-    title: "McDonalds",
-    price: 20,
-    image:
-      "https://www.pngplay.com/wp-content/uploads/9/McDonalds-Transparent-Free-PNG.png",
-  },
-  {
-    id: 3,
-    title: "KFC",
-    price: 15,
-    image:
-      "https://www.pngplay.com/wp-content/uploads/9/KFC-Logo-PNG-Free-File-Download.png",
-  },
-  {
-    id: 4,
-    title: "Starbucks",
-    price: 5,
-    image:
-      "https://www.pngplay.com/wp-content/uploads/8/Starbucks-Coffee-Logo-PNG-Clipart-Background.png",
-  },
-];
+import { getData } from "@/hooks/useFetch";
 
 export default function Home() {
+  const url = "http://localhost:3000/api/restaurants";
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    getData(url, {
+      method: "GET",
+      header: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response: any) => {
+        setData(response.restaurants);
+      })
+      .catch((error: any) => {
+        console.error("Error:", error);
+      });
+    console.log(data);
+  }, []);
+
   return (
     <View style={styles.container}>
       <Search />

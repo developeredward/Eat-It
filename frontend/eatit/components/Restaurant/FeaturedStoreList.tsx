@@ -5,28 +5,11 @@ import FeaturedStoreCard from "./FeaturedStoreCard";
 
 import { wrapperMargin, headerFontSize } from "@/constants/Default";
 
-import { getData } from "@/hooks/useFetch";
+interface FeaturedStoreListProps {
+  data: Array<{ _id: string; [key: string]: any }>;
+}
 
-const FeaturedStoreList = () => {
-  const url = "http://localhost:3000/api/restaurants";
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    getData(url, {
-      method: "GET",
-      header: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response: any) => {
-        setData(response.restaurants);
-      })
-      .catch((error: any) => {
-        console.error("Error:", error);
-      });
-    console.log(data);
-  }, []);
-
+const FeaturedStoreList: React.FC<FeaturedStoreListProps> = ({ data }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Featured Stores</Text>

@@ -20,7 +20,7 @@ const FeaturedStoreCard: React.FC<FeaturedStoreCardProps> = ({ item }) => {
     <TouchableOpacity style={styles.card}>
       <ImageBackground
         source={{
-          uri: "https://www.fastfoodclub.com/wp-content/uploads/2024/09/Get-Ready-for-New-Flavors-McDonalds-Menu-Updates-You-Cant-Miss.png",
+          uri: item.imageurl,
         }}
         resizeMode="cover"
         imageStyle={styles.info}
@@ -34,7 +34,7 @@ const FeaturedStoreCard: React.FC<FeaturedStoreCardProps> = ({ item }) => {
           style={styles.infoText}
         >
           <View>
-            <Text style={styles.heading}>McDonald's</Text>
+            <Text style={styles.heading}>{item.name}</Text>
             <Text style={styles.dist}>24 Min | Pick up | Delivery</Text>
           </View>
           <View>

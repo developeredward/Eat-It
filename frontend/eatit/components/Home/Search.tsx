@@ -1,8 +1,8 @@
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import { View, TouchableOpacity, StyleSheet, TextInput } from "react-native";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import React from "react";
 
-const { primaryColor, secondaryColor } = require("@/constants/Colors");
+const { secondaryColor } = require("@/constants/Colors");
 
 const { iconSize, wrapperMargin } = require("@/constants/Default");
 
@@ -16,13 +16,13 @@ const Search = () => {
           placeholder="Search for food"
         ></TextInput>
       </View>
-      <View style={styles.filterGroup}>
+      <TouchableOpacity style={styles.filterGroup}>
         <Ionicons
           name="filter-circle-sharp"
           color={secondaryColor}
           size={iconSize + 15}
         />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     paddingLeft: wrapperMargin,
     paddingRight: wrapperMargin,
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
     alignItems: "center",
     gap: 10,
     width: "100%",
@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
   },
   filterGroup: {
     borderRadius: 100,
+    flex: 0.14,
   },
   inputField: {
     height: 50,

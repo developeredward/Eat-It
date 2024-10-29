@@ -1,22 +1,11 @@
 import React from "react";
-import {
-  Octicons,
-  Ionicons,
-  SimpleLineIcons,
-  Feather,
-  MaterialIcons,
-  Entypo,
-} from "@expo/vector-icons";
-import { SafeAreaView, View, Text, Image, StyleSheet } from "react-native";
+import { Ionicons, MaterialIcons, Entypo } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native";
 import { Tabs } from "expo-router";
 import Header from "@/components/Header/Header";
 import HeaderLeft from "@/components/Header/HeaderLeft";
 
-const {
-  primaryColor,
-  altColor,
-  secondaryColor,
-} = require("@/constants/Colors");
+const { altColor, secondaryColor } = require("@/constants/Colors");
 const { iconSize, wrapperMargin } = require("@/constants/Default");
 
 export default function TabLayout() {
@@ -38,12 +27,14 @@ export default function TabLayout() {
           ),
 
           headerRight: () => (
-            <Ionicons
-              name="notifications-outline"
-              style={{ marginRight: wrapperMargin }}
-              size={iconSize}
-              color={secondaryColor}
-            />
+            <TouchableOpacity>
+              <Ionicons
+                name="notifications-outline"
+                style={{ marginRight: wrapperMargin }}
+                size={iconSize}
+                color={secondaryColor}
+              />
+            </TouchableOpacity>
           ),
           headerLeft: () => <HeaderLeft />,
         }}

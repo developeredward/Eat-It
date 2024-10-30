@@ -135,14 +135,14 @@ const styles = StyleSheet.create({
   },
   location1: {
     top: 150,
-    left: 10,
+    left: 13,
   },
   location2: {
     top: 10,
-    right: 10,
+    right: 7,
   },
   location3: {
-    top: 370,
+    top: 350,
     left: 300,
   },
 });

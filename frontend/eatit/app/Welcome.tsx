@@ -11,6 +11,18 @@ const Welcome = () => {
         <View style={[styles.circles, styles.circle2]}></View>
         <View style={[styles.circles, styles.circle3]}></View>
         <Image
+          style={[styles.locationDesign, styles.location1]}
+          source={require("@/assets/images/blue.png")}
+        />
+        <Image
+          style={[styles.locationDesign, styles.location2]}
+          source={require("@/assets/images/gray.png")}
+        />
+        <Image
+          style={[styles.locationDesign, styles.location3]}
+          source={require("@/assets/images/orange.png")}
+        />
+        <Image
           source={require("@/assets/images/welcome.png")}
           style={styles.image}
         />
@@ -114,6 +126,24 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
+  },
+  locationDesign: {
+    position: "absolute",
+    width: 40,
+    height: 40,
+    objectFit: "contain",
+  },
+  location1: {
+    top: 150,
+    left: 10,
+  },
+  location2: {
+    top: 10,
+    right: 10,
+  },
+  location3: {
+    top: 370,
+    left: 300,
   },
 });
 

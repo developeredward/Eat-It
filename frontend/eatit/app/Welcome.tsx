@@ -1,9 +1,28 @@
-import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  Modal,
+  StyleSheet,
+} from "react-native";
+import React, { useState } from "react";
+import { Link } from "expo-router";
 import { primaryColor, secondaryColor, altColor } from "@/constants/Colors";
-import { wrapperMargin } from "@/constants/Default";
+import { wrapperMargin, iconSize } from "@/constants/Default";
+import { Ionicons } from "@expo/vector-icons";
 
 const Welcome = () => {
+  const [loginModalVisible, setLoginModalVisible] = useState(false);
+  const [registerModalVisible, setRegisterModalVisible] = useState(false);
+
+  const openLoginModal = () => {
+    setLoginModalVisible(true);
+  };
+  const openRegisterModal = () => {
+    setRegisterModalVisible(true);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -34,18 +53,60 @@ const Welcome = () => {
         </Text>
       </View>
       <View style={styles.btnContainer}>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => openRegisterModal()}
+        >
           <Text style={{ color: "#ffffff", fontSize: 15, fontWeight: "bold" }}>
             Sign Up
           </Text>
         </TouchableOpacity>
+
         <TouchableOpacity
           style={[styles.btn, { top: 15, backgroundColor: secondaryColor }]}
+          onPress={() => openLoginModal()}
         >
           <Text style={{ color: "#ffffff", fontSize: 15, fontWeight: "bold" }}>
             Login
           </Text>
         </TouchableOpacity>
+
+        {loginModalVisible && (
+          <Modal
+            transparent={true}
+            animationType="slide"
+            visible={loginModalVisible}
+            onRequestClose={() => setLoginModalVisible(false)}
+          >
+            <View style={styles.modal}>
+              <Text>Login</Text>
+              <TouchableOpacity
+                style={styles.close}
+                onPress={() => setLoginModalVisible(false)}
+              >
+                <Ionicons name="close" size={iconSize} />
+              </TouchableOpacity>
+            </View>
+          </Modal>
+        )}
+        {registerModalVisible && (
+          <Modal
+            transparent={true}
+            animationType="slide"
+            visible={registerModalVisible}
+            onRequestClose={() => setRegisterModalVisible(false)}
+          >
+            <View style={styles.modal}>
+              <Text>Register</Text>
+              <TouchableOpacity
+                style={styles.close}
+                onPress={() => setRegisterModalVisible(false)}
+              >
+                <Ionicons color={altColor} name="close" size={iconSize} />
+              </TouchableOpacity>
+            </View>
+          </Modal>
+        )}
       </View>
     </View>
   );
@@ -134,16 +195,33 @@ const styles = StyleSheet.create({
     objectFit: "contain",
   },
   location1: {
-    top: 150,
-    left: 13,
+    top: 100,
+    left: 10,
+    transform: [{ rotate: "-30deg" }],
   },
   location2: {
     top: 10,
     right: 7,
+    transform: [{ rotate: "45deg" }],
   },
   location3: {
-    top: 350,
-    left: 300,
+    top: 380,
+    left: 320,
+    transform: [{ rotate: "130deg" }],
+  },
+  modal: {
+    backgroundColor: "#ffffff",
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
+    top: "50%",
+    height: "50%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  close: {
+    position: "absolute",
+    top: 10,
+    right: 20,
   },
 });
 

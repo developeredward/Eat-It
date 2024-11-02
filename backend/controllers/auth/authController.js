@@ -10,12 +10,14 @@ const registerController = async (req, res) => {
   try {
     //validation
     if (!name || !email || !password || !phone) {
-      return res.status(400).json({ msg: "Please enter all fields" });
+      return res
+        .status(400)
+        .json({ msg: "Please enter all fields", status: 400 });
     }
     // check for existing user.
     const user = await userModel.findOne({ email });
     if (user) {
-      return res.status(400).json({ msg: "User already exists" });
+      return res.status(400).json({ msg: "User already exists", status: 400 });
     }
 
     // Hash password
@@ -30,7 +32,9 @@ const registerController = async (req, res) => {
       phone,
     });
 
-    res.status(200).json({ msg: "User registered successfully", newUser });
+    res
+      .status(200)
+      .json({ msg: "User registered successfully", newUser, status: 200 });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -50,13 +54,13 @@ const loginController = async (req, res) => {
     // check for existing user.
     const user = await userModel.findOne({ email });
     if (!user) {
-      return res.status(400).json({ msg: "User does not exist" });
+      return res.status(404).json({ msg: "User does not exist", status: 404 });
     }
 
     // Validate password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ msg: "Invalid credentials" });
+      return res.status(400).json({ msg: "Invalid credentials", status: 400 });
     }
 
     //create token
@@ -64,7 +68,9 @@ const loginController = async (req, res) => {
       expiresIn: "1h",
     });
 
-    res.status(200).json({ token, user });
+    res
+      .status(200)
+      .json({ token, user, msg: "User logged in successfully", status: 200 });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

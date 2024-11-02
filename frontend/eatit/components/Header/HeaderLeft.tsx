@@ -1,20 +1,57 @@
 import { View, Text, Image, StyleSheet } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { wrapperMargin } from "@/constants/Default";
+import axios from "axios";
+
+import { getData } from "@/hooks/useFetch";
+import { useAuth } from "@/Context/AuthContext";
 
 const HeaderLeft = () => {
+  const { getProfile } = useAuth();
+  const [profile, setProfile] = useState({
+    name: "",
+    img: "",
+  });
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const profileData = await getProfile!();
+      setProfile({
+        name: profileData.user.name,
+        img: profileData.user.avatar,
+      });
+      console.log(profileData);
+    };
+
+    fetchProfile();
+  }, []);
+
   return (
     <View style={styles.headInfoContainer}>
-      <Image
-        height={50}
-        width={50}
-        style={styles.headInfoImage}
-        source={{
-          uri: "https://static.vecteezy.com/system/resources/previews/002/002/403/non_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg",
-        }}
-      />
+      {profile.img ? (
+        <Image
+          height={50}
+          width={50}
+          style={styles.headInfoImage}
+          source={{
+            uri: profile.img,
+          }}
+        />
+      ) : (
+        <Image
+          height={50}
+          width={50}
+          style={styles.headInfoImage}
+          source={{
+            uri: "https://static.vecteezy.com/system/resources/previews/002/002/403/non_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg",
+          }}
+        />
+      )}
+
       <View style={styles.headInfoTextContent}>
-        <Text style={styles.headerInfoText}>Hi, John Doe</Text>
+        {profile.name && (
+          <Text style={styles.headerInfoText}>Hi, {profile.name}</Text>
+        )}
         <Text style={styles.headerInfoPara}>What can we get you?</Text>
       </View>
     </View>

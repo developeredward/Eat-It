@@ -8,7 +8,7 @@ import {
   TextInput,
 } from "react-native";
 import React, { useState } from "react";
-import { Link } from "expo-router";
+import { Link, useNavigation } from "expo-router";
 import { primaryColor, secondaryColor, altColor } from "@/constants/Colors";
 import { wrapperMargin, iconSize } from "@/constants/Default";
 import {
@@ -17,15 +17,123 @@ import {
   AntDesign,
 } from "@expo/vector-icons";
 
+import { postData } from "@/hooks/useFetch";
+import { useAuth } from "@/Context/AuthContext";
+
 const Welcome = () => {
+  const navigation = useNavigation<any>();
   const [loginModalVisible, setLoginModalVisible] = useState(false);
   const [registerModalVisible, setRegisterModalVisible] = useState(false);
+
+  const { login, register, authState } = useAuth();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   const openLoginModal = () => {
     setLoginModalVisible(true);
   };
   const openRegisterModal = () => {
     setRegisterModalVisible(true);
+  };
+
+  // const handleLogin = () => {
+  //   if (!email || !password) {
+  //     setErrorMessage("Please fill all required fields");
+  //     return;
+  //   }
+
+  //   postData(
+  //     "http://192.168.8.127:3000/api/auth/login",
+  //     {
+  //       "Content-Type": "application/json",
+  //     },
+  //     { email, password }
+  //   )
+  //     .then((response) => {
+  //       console.log(response);
+  //       if (response.status === 400) {
+  //         setErrorMessage("Invalid email or password");
+  //       } else if (response.status === 404) {
+  //         setErrorMessage("User not found");
+  //       } else if (response.status === 200) {
+  //         setEmail("");
+  //         setPassword("");
+  //         setLoginModalVisible(false);
+  //       } else {
+  //         setErrorMessage("An error occured");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error:", error);
+  //       setErrorMessage(error.msg);
+  //     });
+  // };
+
+  const handleLogin = async () => {
+    try {
+      const response = await login!(email, password);
+      console.log(response);
+      if (response.status === 400) {
+        setErrorMessage("Invalid email or password");
+      } else if (response.status === 404) {
+        setErrorMessage("User not found");
+      } else if (response.status === 200) {
+        setEmail("");
+        setPassword("");
+        setLoginModalVisible(false);
+
+        // Redirect to home page
+        navigation.navigate("(tabs)");
+        console.log(authState);
+      } else {
+        setErrorMessage("An error occured");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage("An unknown error occurred");
+      }
+    }
+  };
+
+  const handleRegister = () => {
+    if (!email || !password || !name || !phoneNumber) {
+      setErrorMessage("Please fill all required fields");
+      return;
+    }
+
+    postData(
+      "http://192.168.8.127:3000/api/auth/register",
+      {
+        "Content-Type": "application/json",
+      },
+      { email: email, password: password, name: name, phone: phoneNumber }
+    )
+      .then((response) => {
+        console.log(response);
+        if (response.status === 400) {
+          setErrorMessage("User already exists");
+        } else if (response.status === 200) {
+          setEmail("");
+          setPassword("");
+          setName("");
+          setPhoneNumber("");
+          setRegisterModalVisible(false);
+        } else {
+          setErrorMessage("An error occured");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        setErrorMessage(error.msg);
+      });
   };
 
   return (
@@ -93,12 +201,16 @@ const Welcome = () => {
               <View style={styles.title}>
                 <Text style={styles.header}>Welcome back!</Text>
                 <Text style={styles.desc}>Login to continue</Text>
+                {errorMessage && (
+                  <Text style={styles.error}>{errorMessage}</Text>
+                )}
               </View>
               <View style={styles.inputContainer}>
                 <View style={{ gap: 10 }}>
                   <Text style={styles.btnTitle}>
                     Email <Text>*</Text>{" "}
                   </Text>
+
                   <View style={styles.inputField}>
                     <Ionicons
                       name="mail-outline"
@@ -106,6 +218,9 @@ const Welcome = () => {
                       size={iconSize - 10}
                     />
                     <TextInput
+                      value={email}
+                      autoCapitalize="none"
+                      onChangeText={(text) => setEmail(text)}
                       placeholderTextColor={secondaryColor}
                       autoFocus={true}
                       style={styles.input}
@@ -124,6 +239,9 @@ const Welcome = () => {
                       size={iconSize - 10}
                     />
                     <TextInput
+                      autoCapitalize="none"
+                      value={password}
+                      onChangeText={(text) => setPassword(text)}
                       placeholderTextColor={secondaryColor}
                       style={styles.input}
                       placeholder="Enter your password..."
@@ -156,19 +274,20 @@ const Welcome = () => {
                   { top: 50, marginLeft: 0, marginRight: 0 },
                 ]}
               >
-                <Link
+                {/* <Link
                   href={"/(tabs)/Home"}
                   style={[styles.btn, { backgroundColor: secondaryColor }]}
                   asChild
+                > */}
+                <TouchableOpacity
+                  onPress={() => handleLogin()}
+                  style={[styles.btn, { backgroundColor: secondaryColor }]}
                 >
-                  <TouchableOpacity
-                  // style={[styles.btn, { backgroundColor: secondaryColor }]}
-                  >
-                    <Text style={{ color: "#ffffff", fontWeight: "bold" }}>
-                      Login
-                    </Text>
-                  </TouchableOpacity>
-                </Link>
+                  <Text style={{ color: "#ffffff", fontWeight: "bold" }}>
+                    Login
+                  </Text>
+                </TouchableOpacity>
+                {/* </Link> */}
                 <View
                   style={{
                     flexDirection: "row",
@@ -237,6 +356,9 @@ const Welcome = () => {
               <View style={styles.title}>
                 <Text style={styles.header}>Create an Account</Text>
                 <Text style={styles.desc}>Complete the form to register</Text>
+                {errorMessage && (
+                  <Text style={styles.error}>{errorMessage}</Text>
+                )}
               </View>
               <View style={styles.inputContainer}>
                 <View style={{ gap: 10 }}>
@@ -250,7 +372,9 @@ const Welcome = () => {
                       size={iconSize - 10}
                     />
                     <TextInput
+                      value={name}
                       placeholderTextColor={secondaryColor}
+                      onChangeText={(text) => setName(text)}
                       style={styles.input}
                       placeholder="Enter your name..."
                     />
@@ -270,6 +394,9 @@ const Welcome = () => {
                       placeholderTextColor={secondaryColor}
                       textContentType="emailAddress"
                       inputMode="email"
+                      autoCapitalize="none"
+                      value={email}
+                      onChangeText={(text) => setEmail(text)}
                       style={styles.input}
                       placeholder="Enter your email..."
                     />
@@ -289,6 +416,8 @@ const Welcome = () => {
                       placeholderTextColor={secondaryColor}
                       textContentType="telephoneNumber"
                       inputMode="tel"
+                      value={phoneNumber}
+                      onChangeText={(text) => setPhoneNumber(text)}
                       style={styles.input}
                       placeholder="Enter your phone number..."
                     />
@@ -308,6 +437,9 @@ const Welcome = () => {
                       placeholderTextColor={secondaryColor}
                       secureTextEntry={true}
                       textContentType="password"
+                      value={password}
+                      onChangeText={(text) => setPassword(text)}
+                      autoCapitalize="none"
                       style={styles.input}
                       placeholder="Enter your password..."
                     />
@@ -321,6 +453,7 @@ const Welcome = () => {
                 ]}
               >
                 <TouchableOpacity
+                  onPress={() => handleRegister()}
                   style={[styles.btn, { backgroundColor: secondaryColor }]}
                 >
                   <Text style={{ color: "#ffffff", fontWeight: "bold" }}>
@@ -398,6 +531,11 @@ const styles = StyleSheet.create({
     height: 400,
     marginTop: -50,
   },
+  error: {
+    color: "red",
+    // textAlign: "center",
+    marginTop: 10,
+  },
   textContainer: {
     marginTop: 80,
     justifyContent: "center",
@@ -447,7 +585,7 @@ const styles = StyleSheet.create({
   btnContainer: {
     marginLeft: wrapperMargin,
     marginRight: wrapperMargin,
-    top: 100,
+    top: 80,
     width: "100%",
     justifyContent: "center",
     alignItems: "center",

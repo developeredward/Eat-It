@@ -10,6 +10,7 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
+import { AuthProvider, useAuth } from "@/Context/AuthContext";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -49,17 +50,21 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
+  const { authState, logout } = useAuth();
   const theme = "light";
   return (
-    <>
+    <AuthProvider>
       <StatusBar
         backgroundColor={theme === "light" ? "#fff" : "#000"}
         style={theme === "light" ? "dark" : "light"}
       />
-      <Stack initialRouteName="Home">
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack screenOptions={{ headerShown: false }}>
+        {authState?.authenticated ? (
+          <Stack.Screen name="Home" options={{ headerShown: false }} />
+        ) : (
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+        )}
       </Stack>
-    </>
+    </AuthProvider>
   );
 }

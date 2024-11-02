@@ -5,12 +5,17 @@ import {
   Image,
   Modal,
   StyleSheet,
+  TextInput,
 } from "react-native";
 import React, { useState } from "react";
 import { Link } from "expo-router";
 import { primaryColor, secondaryColor, altColor } from "@/constants/Colors";
 import { wrapperMargin, iconSize } from "@/constants/Default";
-import { Ionicons } from "@expo/vector-icons";
+import {
+  Ionicons,
+  MaterialCommunityIcons,
+  AntDesign,
+} from "@expo/vector-icons";
 
 const Welcome = () => {
   const [loginModalVisible, setLoginModalVisible] = useState(false);
@@ -79,13 +84,139 @@ const Welcome = () => {
             onRequestClose={() => setLoginModalVisible(false)}
           >
             <View style={styles.modal}>
-              <Text>Login</Text>
               <TouchableOpacity
                 style={styles.close}
                 onPress={() => setLoginModalVisible(false)}
               >
-                <Ionicons name="close" size={iconSize} />
+                <Ionicons color={altColor} name="close" size={iconSize} />
               </TouchableOpacity>
+              <View style={styles.title}>
+                <Text style={styles.header}>Welcome back!</Text>
+                <Text style={styles.desc}>Login to continue</Text>
+              </View>
+              <View style={styles.inputContainer}>
+                <View style={{ gap: 10 }}>
+                  <Text style={styles.btnTitle}>
+                    Email <Text>*</Text>{" "}
+                  </Text>
+                  <View style={styles.inputField}>
+                    <Ionicons
+                      name="mail-outline"
+                      color={secondaryColor}
+                      size={iconSize - 10}
+                    />
+                    <TextInput
+                      placeholderTextColor={secondaryColor}
+                      autoFocus={true}
+                      style={styles.input}
+                      placeholder="Enter your email..."
+                    />
+                  </View>
+                </View>
+                <View style={{ gap: 10 }}>
+                  <Text style={styles.btnTitle}>
+                    Password <Text>*</Text>{" "}
+                  </Text>
+                  <View style={styles.inputField}>
+                    <Ionicons
+                      name="lock-closed-outline"
+                      color={secondaryColor}
+                      size={iconSize - 10}
+                    />
+                    <TextInput
+                      placeholderTextColor={secondaryColor}
+                      style={styles.input}
+                      placeholder="Enter your password..."
+                    />
+                  </View>
+                </View>
+
+                <View style={styles.altActions}>
+                  <TouchableOpacity style={styles.checkboxContainer}>
+                    <MaterialCommunityIcons
+                      size={iconSize - 10}
+                      name="checkbox-blank-outline"
+                    />
+                    {/* <MaterialCommunityIcons name="checkbox-outline" /> */}
+
+                    <Text>Remember me</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={{ justifyContent: "center", alignItems: "center" }}
+                  >
+                    <Text style={{ color: altColor, textAlign: "center" }}>
+                      Forgot Password?
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <View
+                style={[
+                  styles.btnContainer,
+                  { top: 50, marginLeft: 0, marginRight: 0 },
+                ]}
+              >
+                <Link
+                  href={"/(tabs)/Home"}
+                  style={[styles.btn, { backgroundColor: secondaryColor }]}
+                  asChild
+                >
+                  <TouchableOpacity
+                  // style={[styles.btn, { backgroundColor: secondaryColor }]}
+                  >
+                    <Text style={{ color: "#ffffff", fontWeight: "bold" }}>
+                      Login
+                    </Text>
+                  </TouchableOpacity>
+                </Link>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    gap: 5,
+                    top: 20,
+                    alignItems: "center",
+                  }}
+                >
+                  <Text
+                    style={[
+                      styles.desc,
+                      {
+                        color: secondaryColor,
+                        textAlign: "center",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      },
+                    ]}
+                  >
+                    Don't have ant account?{" "}
+                  </Text>
+                  <TouchableOpacity
+                    style={{
+                      alignItems: "center",
+                      borderBottomWidth: 1,
+                      borderBottomColor: "#00A2E3",
+                    }}
+                    onPress={() => {
+                      setRegisterModalVisible(true);
+                      setLoginModalVisible(false);
+                    }}
+                  >
+                    <Text
+                      style={[
+                        styles.desc,
+                        {
+                          color: "#00A2E3",
+                          textAlign: "center",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        },
+                      ]}
+                    >
+                      Sign Up
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
           </Modal>
         )}
@@ -97,13 +228,154 @@ const Welcome = () => {
             onRequestClose={() => setRegisterModalVisible(false)}
           >
             <View style={styles.modal}>
-              <Text>Register</Text>
               <TouchableOpacity
                 style={styles.close}
                 onPress={() => setRegisterModalVisible(false)}
               >
                 <Ionicons color={altColor} name="close" size={iconSize} />
               </TouchableOpacity>
+              <View style={styles.title}>
+                <Text style={styles.header}>Create an Account</Text>
+                <Text style={styles.desc}>Complete the form to register</Text>
+              </View>
+              <View style={styles.inputContainer}>
+                <View style={{ gap: 10 }}>
+                  <Text style={styles.btnTitle}>
+                    Name <Text>*</Text>{" "}
+                  </Text>
+                  <View style={styles.inputField}>
+                    <AntDesign
+                      name="user"
+                      color={secondaryColor}
+                      size={iconSize - 10}
+                    />
+                    <TextInput
+                      placeholderTextColor={secondaryColor}
+                      style={styles.input}
+                      placeholder="Enter your name..."
+                    />
+                  </View>
+                </View>
+                <View style={{ gap: 10 }}>
+                  <Text style={styles.btnTitle}>
+                    Email <Text>*</Text>{" "}
+                  </Text>
+                  <View style={styles.inputField}>
+                    <Ionicons
+                      name="mail-outline"
+                      color={secondaryColor}
+                      size={iconSize - 10}
+                    />
+                    <TextInput
+                      placeholderTextColor={secondaryColor}
+                      textContentType="emailAddress"
+                      inputMode="email"
+                      style={styles.input}
+                      placeholder="Enter your email..."
+                    />
+                  </View>
+                </View>
+                <View style={{ gap: 10 }}>
+                  <Text style={styles.btnTitle}>
+                    Phone Number <Text>*</Text>{" "}
+                  </Text>
+                  <View style={styles.inputField}>
+                    <AntDesign
+                      name="phone"
+                      color={secondaryColor}
+                      size={iconSize - 10}
+                    />
+                    <TextInput
+                      placeholderTextColor={secondaryColor}
+                      textContentType="telephoneNumber"
+                      inputMode="tel"
+                      style={styles.input}
+                      placeholder="Enter your phone number..."
+                    />
+                  </View>
+                </View>
+                <View style={{ gap: 10 }}>
+                  <Text style={styles.btnTitle}>
+                    Password <Text>*</Text>{" "}
+                  </Text>
+                  <View style={styles.inputField}>
+                    <Ionicons
+                      name="lock-closed-outline"
+                      color={secondaryColor}
+                      size={iconSize - 10}
+                    />
+                    <TextInput
+                      placeholderTextColor={secondaryColor}
+                      secureTextEntry={true}
+                      textContentType="password"
+                      style={styles.input}
+                      placeholder="Enter your password..."
+                    />
+                  </View>
+                </View>
+              </View>
+              <View
+                style={[
+                  styles.btnContainer,
+                  { top: 0, marginTop: 20, marginLeft: 0, marginRight: 0 },
+                ]}
+              >
+                <TouchableOpacity
+                  style={[styles.btn, { backgroundColor: secondaryColor }]}
+                >
+                  <Text style={{ color: "#ffffff", fontWeight: "bold" }}>
+                    Sign Up
+                  </Text>
+                </TouchableOpacity>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    gap: 5,
+                    marginTop: 20,
+                    alignItems: "center",
+                  }}
+                >
+                  <Text
+                    style={[
+                      styles.desc,
+                      {
+                        color: secondaryColor,
+                        textAlign: "center",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      },
+                    ]}
+                  >
+                    Already have an account?{" "}
+                  </Text>
+
+                  <TouchableOpacity
+                    style={{
+                      alignItems: "center",
+                      borderBottomWidth: 1,
+                      borderBottomColor: "#00A2E3",
+                    }}
+                    onPress={() => {
+                      setRegisterModalVisible(false);
+                      setLoginModalVisible(true);
+                    }}
+                  >
+                    <Text
+                      style={[
+                        styles.desc,
+                        {
+                          color: "#00A2E3",
+                          textAlign: "center",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        },
+                      ]}
+                    >
+                      Login
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
           </Modal>
         )}
@@ -211,17 +483,54 @@ const styles = StyleSheet.create({
   },
   modal: {
     backgroundColor: "#ffffff",
-    borderTopRightRadius: 30,
-    borderTopLeftRadius: 30,
-    top: "50%",
-    height: "50%",
-    justifyContent: "center",
-    alignItems: "center",
+    borderTopRightRadius: 50,
+    borderTopLeftRadius: 50,
+    height: "80%",
+    marginTop: "auto",
   },
   close: {
     position: "absolute",
-    top: 10,
+    top: 20,
     right: 20,
+  },
+  title: {
+    marginTop: 60,
+    marginLeft: wrapperMargin,
+    gap: 10,
+  },
+  inputContainer: {
+    marginTop: 30,
+    marginLeft: wrapperMargin,
+    marginRight: wrapperMargin,
+    gap: 30,
+  },
+  inputField: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+    backgroundColor: primaryColor,
+    gap: 10,
+    borderRadius: 10,
+    height: 50,
+    width: "100%",
+  },
+  input: {
+    width: "100%",
+  },
+  altActions: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  checkboxContainer: {
+    flexDirection: "row",
+    gap: 5,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  btnTitle: {
+    color: secondaryColor,
+    fontSize: 15,
+    fontWeight: "bold",
   },
 });
 

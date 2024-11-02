@@ -1,5 +1,6 @@
 import { View, Text, Image, StyleSheet } from "react-native";
 import React from "react";
+import { wrapperMargin } from "@/constants/Default";
 
 const HeaderLeft = () => {
   return (
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginLeft: 40,
+    marginLeft: wrapperMargin,
     height: 50,
     gap: 10,
     width: "100%",

@@ -4,6 +4,7 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -48,10 +49,17 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
+  const theme = "light";
   return (
-    <Stack initialRouteName="Home">
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-    </Stack>
+    <>
+      <StatusBar
+        backgroundColor={theme === "light" ? "#fff" : "#000"}
+        style={theme === "light" ? "dark" : "light"}
+      />
+      <Stack initialRouteName="Home">
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+      </Stack>
+    </>
   );
 }

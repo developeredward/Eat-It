@@ -13,6 +13,7 @@ const Search = () => {
         <Feather name="search" size={iconSize - 5} color={secondaryColor} />
         <TextInput
           style={styles.inputField}
+          placeholderTextColor={secondaryColor}
           placeholder="Search for food"
         ></TextInput>
       </View>

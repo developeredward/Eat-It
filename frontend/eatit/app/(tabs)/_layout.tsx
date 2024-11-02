@@ -23,7 +23,13 @@ export default function TabLayout() {
           title: "",
           headerBackground: () => <Header />,
           tabBarIcon: ({ color }) => (
-            <Entypo name="home" size={30} color={color} fill={color} />
+            <Entypo
+              style={{ marginRight: wrapperMargin + 40 }}
+              name="home"
+              size={30}
+              color={color}
+              fill={color}
+            />
           ),
 
           headerRight: () => (
@@ -51,7 +57,12 @@ export default function TabLayout() {
         name="Cart"
         options={{
           tabBarIcon: ({ color }) => (
-            <Ionicons name="cart" size={iconSize} color={color} />
+            <Ionicons
+              style={{ marginLeft: wrapperMargin + 40 }}
+              name="cart"
+              size={iconSize}
+              color={color}
+            />
           ),
         }}
       />

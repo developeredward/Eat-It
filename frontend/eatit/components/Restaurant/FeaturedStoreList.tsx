@@ -28,7 +28,7 @@ const FeaturedStoreList: React.FC<FeaturedStoreListProps> = ({ data }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 30,
+    marginTop: 100,
     height: 350,
   },
   title: {

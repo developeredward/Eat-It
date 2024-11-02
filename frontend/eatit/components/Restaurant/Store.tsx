@@ -25,11 +25,11 @@ const Store: React.FC<StoreProps> = ({ item }) => {
 
 const styles = StyleSheet.create({
   card: {
-    width: 150,
-    height: 150,
+    width: 170,
+    height: 170,
     borderRadius: 100,
     backgroundColor: "#ffffff",
-    marginBottom: 10,
+    marginBottom: 20,
     marginTop: 10,
     justifyContent: "center",
     alignItems: "center",

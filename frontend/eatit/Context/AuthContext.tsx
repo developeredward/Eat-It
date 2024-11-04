@@ -8,7 +8,7 @@ interface AuthContextProps {
   register?: (
     name: string,
     email: string,
-    phone: number,
+    phone: string,
     password: string
   ) => Promise<any>;
   getProfile?: () => Promise<any>;
@@ -86,7 +86,7 @@ export const AuthProvider = ({ children }: any) => {
   const register = async (
     name: string,
     email: string,
-    phone: number,
+    phone: string,
     password: string
   ) => {
     try {
@@ -96,7 +96,7 @@ export const AuthProvider = ({ children }: any) => {
         phone,
         password,
       });
-
+      login(email, password);
       return response.data;
     } catch (error) {
       console.log(error);

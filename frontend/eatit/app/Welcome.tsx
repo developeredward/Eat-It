@@ -103,37 +103,62 @@ const Welcome = () => {
     }
   };
 
-  const handleRegister = () => {
-    if (!email || !password || !name || !phoneNumber) {
-      setErrorMessage("Please fill all required fields");
-      return;
-    }
+  // const handleRegister = () => {
+  //   if (!email || !password || !name || !phoneNumber) {
+  //     setErrorMessage("Please fill all required fields");
+  //     return;
+  //   }
 
-    postData(
-      "http://192.168.8.127:3000/api/auth/register",
-      {
-        "Content-Type": "application/json",
-      },
-      { email: email, password: password, name: name, phone: phoneNumber }
-    )
-      .then((response) => {
-        console.log(response);
-        if (response.status === 400) {
-          setErrorMessage("User already exists");
-        } else if (response.status === 200) {
-          setEmail("");
-          setPassword("");
-          setName("");
-          setPhoneNumber("");
-          setRegisterModalVisible(false);
-        } else {
-          setErrorMessage("An error occured");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        setErrorMessage(error.msg);
-      });
+  //   postData(
+  //     "http://192.168.8.127:3000/api/auth/register",
+  //     {
+  //       "Content-Type": "application/json",
+  //     },
+  //     { email: email, password: password, name: name, phone: phoneNumber }
+  //   )
+  //     .then((response) => {
+  //       console.log(response);
+  //       if (response.status === 400) {
+  //         setErrorMessage("User already exists");
+  //       } else if (response.status === 200) {
+  //         setEmail("");
+  //         setPassword("");
+  //         setName("");
+  //         setPhoneNumber("");
+  //         setRegisterModalVisible(false);
+  //       } else {
+  //         setErrorMessage("An error occured");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error:", error);
+  //       setErrorMessage(error.msg);
+  //     });
+  // };
+
+  const handleRegister = async () => {
+    try {
+      const response = await register!(name, email, phoneNumber, password);
+      console.log(response);
+      if (response.status === 400) {
+        setErrorMessage("User already exists");
+      } else if (response.status === 200) {
+        setEmail("");
+        setPassword("");
+        setName("");
+        setPhoneNumber("");
+        setRegisterModalVisible(false);
+      } else {
+        setErrorMessage("An error occured");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage("An unknown error occurred");
+      }
+    }
   };
 
   return (

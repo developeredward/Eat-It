@@ -1,2 +1,2 @@
 # Eat-It
-Restaurant
+Restaurant Delivery app

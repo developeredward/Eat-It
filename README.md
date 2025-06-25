@@ -1,2 +1,2 @@
 # Eat-It
-Restaurant Delivery app with React Native
+Restaurant Delivery app 

@@ -17,7 +17,7 @@ const { wrapperMargin, headerFontSize } = require("@/constants/Default");
 import { getData } from "@/hooks/useFetch";
 
 export default function Home() {
-  const url = "http://192.168.8.127:3000/api/restaurants";
+  const url = "http://localhost:3000/api/restaurants";
   const [data, setData] = useState([]);
 
   useEffect(() => {

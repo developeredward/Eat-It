@@ -15,7 +15,8 @@ interface AuthContextProps {
   logout?: () => Promise<any>;
 }
 
-export const API_URL = "http://192.168.8.127:3000/api/";
+// export const API_URL = "http://localhost:3000/api/";
+export const API_URL = "http://192.168.8.153:3000/api/";
 
 const AuthContext = createContext<AuthContextProps>({});
 

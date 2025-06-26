@@ -86,6 +86,7 @@ const Welcome = () => {
         setEmail("");
         setPassword("");
         setLoginModalVisible(false);
+        setErrorMessage("");
 
         // Redirect to home page
         navigation.navigate("(tabs)");
@@ -219,7 +220,10 @@ const Welcome = () => {
             <View style={styles.modal}>
               <TouchableOpacity
                 style={styles.close}
-                onPress={() => setLoginModalVisible(false)}
+                onPress={() => {
+                  setLoginModalVisible(false);
+                  setErrorMessage("");
+                }}
               >
                 <Ionicons color={altColor} name="close" size={iconSize} />
               </TouchableOpacity>
@@ -343,6 +347,7 @@ const Welcome = () => {
                     onPress={() => {
                       setRegisterModalVisible(true);
                       setLoginModalVisible(false);
+                      setErrorMessage("");
                     }}
                   >
                     <Text
@@ -374,7 +379,10 @@ const Welcome = () => {
             <View style={styles.modal}>
               <TouchableOpacity
                 style={styles.close}
-                onPress={() => setRegisterModalVisible(false)}
+                onPress={() => {
+                  setRegisterModalVisible(false);
+                  setErrorMessage("");
+                }}
               >
                 <Ionicons color={altColor} name="close" size={iconSize} />
               </TouchableOpacity>
